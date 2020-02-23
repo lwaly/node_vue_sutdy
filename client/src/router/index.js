@@ -39,6 +39,10 @@ export default [
   },
   {
     path: '/',
+    meta: {
+      //meta元素
+      requireAuth: true,
+    },
     name: 'Content',
     component: Content
   }

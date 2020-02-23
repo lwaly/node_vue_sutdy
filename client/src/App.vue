@@ -1,22 +1,6 @@
 <template>
     <div id="app">
-        <div class="container">
-            <div>
-                <div class="py-5 text-center">
-                    <img src="./assets/images/sequelize.jpg" />
-                    <p class="lead">
-                        爱就好比骑马和学法语，如果不趁年轻时学会，以后想学会就难了。
-                    </p>
-                    <p class="lead">
-                        Love is like riding or speaking French,if you don not
-                        learn it young, it's hard to get the trick of it later.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div>
-            <router-view></router-view>
-        </div>
+        <router-view></router-view>
     </div>
 </template>
 
