@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root@appinside",
+    "database": "vue",
+    "host": "192.168.0.20",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "timezone":"+08:00"
+  },
+  "test": {
+    "username": "root",
+    "password": "root@appinside",
+    "database": "vue",
+    "host": "192.168.0.20",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "timezone":"+08:00"
+  },
+  "production": {
+    "username": "root",
+    "password": "root@appinside",
+    "database": "vue",
+    "host": "192.168.0.20",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "timezone":"+08:00"
+  }
+}
