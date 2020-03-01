@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import App from './App'
-import routes from './router'
+import routers from './router'
 import './assets/css/bootstrap.min.css'
 import store from './vuex/store'
 import VueResource from 'vue-resource'
@@ -13,7 +13,7 @@ Vue.use(VueRouter)
 // Vue.config.productionTip = false
 // 全局导航钩子
 const router = new VueRouter({
-  routes
+  routes: routers
 })
 router.beforeEach((to, from, next) => {
   console.log(to)

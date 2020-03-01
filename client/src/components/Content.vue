@@ -2,9 +2,16 @@
     <div class="container">
         <div>
             <div class="text-right">
-                <router-link to="/register">注册</router-link>
-                <span> | </span>
-                <router-link to="/login">登录</router-link>
+                <div v-if="user.username">
+                    <a href="">{{ user.username }}</a>
+                    <span> | </span>
+                    <a href="" @click.prevent="login">退出</a>
+                </div>
+                <div v-else>
+                    <router-link to="/register">注册</router-link>
+                    <span> | </span>
+                    <router-link to="/login">登录</router-link>
+                </div>
             </div>
             <div>
                 <div class="py-5 text-center">
@@ -32,8 +39,13 @@
                         {{ content.content }}
                     </p>
                     <footer class="text-right">
-                        <a href="">赞({{ content.like_count }})</a>
+                        <!-- <a @click="like">赞({{ content.like_count }})</a>
                         <a href="">回复({{ content.comment_count }})</a>
+                        <a href="">我要回复</a> -->
+                        <small @click="like()"
+                            >赞（{{ content.like_count }}）</small
+                        >
+                        <small>回复（{{ content.comment_count }}）</small>
                         <a href="">我要回复</a>
                     </footer>
                 </div>
@@ -43,6 +55,8 @@
 </template>
 
 <script>
+import Store from "@/vuex/store";
+import axios from "axios";
 export default {
     data() {
         return {
@@ -50,6 +64,7 @@ export default {
             prepage: 2, //每页显示的记录条数
             pages: 1, //总页数
             count: 0, //总记录数
+            user: Store.state.user,
             contents: [
                 {
                     title: "lylylylylylylylylyl",
@@ -64,7 +79,7 @@ export default {
                         "lylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylyly",
                     created_at: 2019,
                     content: "content",
-                    id: 1,
+                    id: 2,
                     like_count: 1,
                     comment_count: 1
                 },
@@ -73,12 +88,45 @@ export default {
                         "lylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylylyly",
                     created_at: 2019,
                     content: "content",
-                    id: 1,
+                    id: 3,
                     like_count: 1,
                     comment_count: 1
                 }
             ]
         };
+    },
+    methods: {
+        isLogin() {
+            console.log("state");
+            console.log(Store.state.user.username);
+            console.log("" == Store.state.user.username);
+            console.log(Store.state);
+            return "" == Store.state.user.username;
+        },
+        like() {
+            console.log("data");
+            axios({
+                method: "post",
+                url: "/api/like",
+                data: {
+                    content_id: 1
+                    // uid: localStorage.getItem('uid') // 如果使用了cookie，就没有必要在通过这样的方式来发送
+                }
+            }).then(({ data }) => {
+                console.log("data1");
+                if (!data.code) {
+                    this.contents.forEach(content => {
+                        console.log("data2", data.data);
+                        if (content.id == data.data) {
+                            content.like_count++;
+                            console.log("data3", content.id);
+                        }
+                    });
+                } else {
+                    alert(data.data);
+                }
+            });
+        }
     }
 };
 </script>
